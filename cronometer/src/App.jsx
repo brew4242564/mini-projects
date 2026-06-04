@@ -1,4 +1,36 @@
 import { useEffect, useState } from "react";
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
+);
+const Input = ({ value, change }) => (
+  <input type="text" value={value} onChange={change} />
+);
+const Timer = ({ seconds, minutes, mode, handleMinutes, handleSeconds }) => {
+  if (mode == "cronometer") {
+    return (
+      <>
+        <h1>{mode}</h1>
+        <h1>
+          {String(minutes).padStart(2, "0")} :{" "}
+          {String(seconds).padStart(2, "0")}
+        </h1>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <h1>{mode}</h1>
+      <h1>
+        {String(minutes).padStart(2, "0")} : {String(seconds).padStart(2, "0")}
+      </h1>
+      <span>minutes</span>
+      <Input value={minutes} change={handleMinutes} />
+      <span>seconds</span>
+      <Input value={seconds} change={handleSeconds} />
+    </>
+  );
+};
 
 function App() {
   const [isRunning, setIsRunning] = useState(false);
@@ -26,7 +58,7 @@ function App() {
     if (mode == "temporizer") {
       const interval = setInterval(() => {
         if (seconds == 0 && minutes == 0) {
-          setIsRunning(false)
+          setIsRunning(false);
           return () => clearInterval(interval);
         }
         setSeconds((prev) => {
@@ -42,7 +74,7 @@ function App() {
     }
   }, [isRunning, mode, minutes, seconds]);
 
-  const handleTimer = () => {
+  const handleRunning = () => {
     setIsRunning((prev) => !prev);
   };
 
@@ -64,22 +96,9 @@ function App() {
 
   return (
     <>
-      <button onClick={handleMode}>Switch to Temporizer</button>
-      <h1>{mode == "cronometer" ? "cronometer" : "temporizer"}</h1>
-      <h1>
-        {String(minutes).padStart(2, "0")} : {String(seconds).padStart(2, "0")}
-      </h1>
-      {mode == "temporizer" ? (
-        <>
-          <span>Minutes</span>
-          <input type="text" value={minutes} onChange={handleMinutes} />
-          <br />
-
-          <span>Seconds</span>
-          <input type="text" value={seconds} onChange={handleSeconds} />
-        </>
-      ) : null}
-      <button onClick={handleTimer}>{isRunning ? "Pause" : "Start"}</button>
+      <Button handleClick={handleMode} text={mode == "cronometer" ? "Switch to Temporizer" : "Switch to Cronometer"}/>
+      <Timer seconds={seconds} minutes={minutes} mode={mode} handleMinutes={handleMinutes} handleSeconds={handleSeconds}/>
+      <Button handleClick={handleRunning} text={isRunning ? "Stop" : "Start"} />
     </>
   );
 }
