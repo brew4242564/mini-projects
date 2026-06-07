@@ -1,35 +1,29 @@
 import { useEffect, useState } from "react";
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>{text}</button>
-);
-const Input = ({ value, change }) => (
-  <input type="text" value={value} onChange={change} />
-);
-const Timer = ({ seconds, minutes, mode, handleMinutes, handleSeconds }) => {
-  if (mode == "cronometer") {
-    return (
-      <>
-        <h1>{mode}</h1>
-        <h1>
-          {String(minutes).padStart(2, "0")} :{" "}
-          {String(seconds).padStart(2, "0")}
-        </h1>
-      </>
-    );
-  }
+import "./App.css";
 
+const Button = ({ handleClick, text, className }) => (
+  <button className={className} onClick={handleClick}>
+    {text}
+  </button>
+);
+const Timer = ({ seconds, minutes }) => {
   return (
     <>
-      <h1>{mode}</h1>
       <h1>
         {String(minutes).padStart(2, "0")} : {String(seconds).padStart(2, "0")}
       </h1>
-      <span>minutes</span>
-      <Input value={minutes} change={handleMinutes} />
-      <span>seconds</span>
-      <Input value={seconds} change={handleSeconds} />
     </>
   );
+};
+
+const TimeInput = ({ time, changeTime, text, mode, max, className }) => {
+  if (mode == "temporizer") {
+    return (
+      <>
+        <input type="text" value={time} onChange={changeTime} placeholder={text} className="timeInput" className={className} maxLength={max}/>
+      </>
+    );
+  }
 };
 
 function App() {
@@ -40,7 +34,6 @@ function App() {
 
   useEffect(() => {
     if (!isRunning) return;
-
     if (mode == "cronometer") {
       const interval = setInterval(() => {
         setSeconds((prev) => {
@@ -78,28 +71,70 @@ function App() {
     setIsRunning((prev) => !prev);
   };
 
-  const handleMode = () => {
+  const handleCronometer = () => {
     setIsRunning(false);
     setMinutes(0);
     setSeconds(0);
-    if (mode == "cronometer") {
-      setMode("temporizer");
-    } else setMode("cronometer");
+    setMode("cronometer");
+  };
+
+  const handleTemporizer = () => {
+    setIsRunning(false);
+    setMinutes(0);
+    setSeconds(0);
+    setMode("temporizer");
   };
 
   const handleSeconds = (e) => {
-    setSeconds(Number(e.target.value));
+    if(Number(e.target.value < 60)) setSeconds(Number(e.target.value));
   };
   const handleMinutes = (e) => {
     setMinutes(Number(e.target.value));
   };
 
   return (
-    <>
-      <Button handleClick={handleMode} text={mode == "cronometer" ? "Switch to Temporizer" : "Switch to Cronometer"}/>
-      <Timer seconds={seconds} minutes={minutes} mode={mode} handleMinutes={handleMinutes} handleSeconds={handleSeconds}/>
-      <Button handleClick={handleRunning} text={isRunning ? "Stop" : "Start"} />
-    </>
+    <div className="wrapper">
+      <div>
+        <Button
+          handleClick={handleCronometer}
+          className={"left-btn"}
+          text={"cronometer"}
+        />
+        <Button
+          handleClick={handleTemporizer}
+          className={"right-btn"}
+          text={"temporizer"}
+        />
+      </div>
+
+      <div className="container">
+        <Timer seconds={seconds} minutes={minutes} />
+      </div>
+      <div className="input-wrapper">
+        <TimeInput
+          text={"minutes"}
+          time={minutes}
+          changeTime={handleMinutes}
+          mode={mode}
+          max={"3"}
+          className={"left-input"}
+        />
+        <TimeInput
+          text={"seconds"}
+          time={seconds}
+          changeTime={handleSeconds}
+          mode={mode}
+          max={"2"}
+          className={"right-input"}
+        />
+      </div>
+
+      <Button
+        className="button"
+        handleClick={handleRunning}
+        text={isRunning ? "Stop" : "Start"}
+      />
+    </div>
   );
 }
 
