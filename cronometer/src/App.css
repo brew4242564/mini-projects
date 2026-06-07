@@ -1,0 +1,114 @@
+.container {
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 50%;
+  border: 2px solid var(--Primary);
+  font-size: 2em;
+  margin: 1.5rem 0;
+  aspect-ratio: 1 / 1;
+}
+
+:root {
+  /* Colores */
+  --Text: hsl(220, 20%, 92%);
+  --Background: hsl(220, 16%, 10%);
+  --Surface: hsl(220, 14%, 15%);
+  --Primary: hsl(258, 60%, 62%);
+  --Secondary: hsl(258, 50%, 72%);
+  /* Medidas */
+  --btn-padding-md: 8px 16px;
+  --btn-radius: 6px;
+  --btn-font-size-md: 14px;
+  --input-padding-x: 12px;
+  --input-radius: 6px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--Background);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+* {
+  color: var(--Text);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.right-btn {
+  background-color: transparent;
+  color: var(--Text);
+  border: 2px solid var(--Primary);
+  border-radius: 0px 10px 10px 0px;
+  border-left: 1px solid var(--Primary);
+  padding: var(--btn-padding-md);
+  font-size: var(--btn-font-size-md);
+}
+
+.left-btn {
+  background-color: transparent;
+  color: var(--Text);
+  border: 2px solid var(--Primary);
+  border-radius: 10px 0px 0px 10px;
+  border-right: 1px solid var(--Primary);
+  padding: var(--btn-padding-md);
+  font-size: var(--btn-font-size-md);
+}
+
+.left-btn:hover,
+.right-btn:hover,
+.button:hover, .right-input:focus,
+.left-input:focus {
+  background-color: var(--Primary);
+  border-color: var(--Secondary);
+  color: var(--Text);
+}
+
+.button {
+  border: 2px solid var(--Primary);
+  border-radius: 15px;
+  background-color: transparent;
+  color: var(--Text);
+  padding: var(--btn-padding-md);
+  font-size: var(--btn-font-size-md);
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-input {
+  border: 2px solid var(--Primary);
+  border-radius: 10px 0px 0px 10px;
+  border-right: 1px solid var(--Primary);
+  padding: var(--input-padding-x);
+  width: 3ch;
+  color: var(--Text);
+  background-color: transparent;
+}
+
+.right-input {
+  border: 2px solid var(--Primary);
+  border-radius: 0px 10px 10px 0px;
+  border-left: 1px solid var(--Primary);
+  padding: var(--input-padding-x);
+  width: 3ch;
+  color: var(--Text);
+  background-color: transparent;
+}
+
+
