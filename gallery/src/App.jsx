@@ -16,7 +16,9 @@ const NextButton = ({ hasNext, incrementSkip }) => {
     return <button onClick={incrementSkip}>Next!</button>;
   }
 };
-
+const RandomButton = ({search, handleRefresh}) => {
+  if(!search) return <button onClick={handleRefresh}>Random!</button>
+}
 const Body = () => <div>Body</div>;
 const Footer = () => <div>Footer</div>;
 const Gallery = ({ cats }) => (
@@ -34,6 +36,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [hasNext, setHasNext] = useState(false);
   const [skip, setSkip] = useState(0);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     async function loadCats() {
@@ -43,7 +46,7 @@ function App() {
       setHasNext(hasNext);
     }
     loadCats();
-  }, [search, skip]);
+  }, [search, skip, refreshKey]);
 
   const changeSearch = () => {
     setSkip(0);
@@ -62,7 +65,9 @@ function App() {
     const decrease = 5;
     setSkip((prev) => prev - decrease);
   };
-
+const handleRefresh = () => {
+  setRefreshKey((prev) => prev + 1); 
+};
   return (
     <>
       <Header />
@@ -77,6 +82,7 @@ function App() {
         <Gallery cats={cats} />
         <NextButton hasNext={hasNext} incrementSkip={incrementSkip} />
         <PrevButton skip={skip} decrementSkip={decreaseSkip} />
+        <RandomButton handleRefresh={handleRefresh} search={search}/>
       </div>
     </>
   );

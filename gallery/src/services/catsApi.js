@@ -37,3 +37,5 @@ export async function getCats({ search, skip }) {
     console.error("Error en getCats (random):", error);
   }
 }
+
+
