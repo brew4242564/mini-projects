@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
-
+import { getCats } from "./services/catsApi";
 const Header = () => (
   <div className="header">
     <p>Header :D</p>
   </div>
 );
 
-const Body = () => <div>Body</div>;
+const PrevButton = ({ skip, decrementSkip }) => {
+  if (skip > 0) {
+    return <button onClick={decrementSkip}>Prev!</button>;
+  }
+};
+const NextButton = ({ hasNext, incrementSkip }) => {
+  if (hasNext) {
+    return <button onClick={incrementSkip}>Next!</button>;
+  }
+};
 
+const Body = () => <div>Body</div>;
 const Footer = () => <div>Footer</div>;
 const Gallery = ({ cats }) => (
   <>
@@ -21,40 +31,38 @@ const Gallery = ({ cats }) => (
 function App() {
   const [cats, setCats] = useState([]);
   const [search, setSearch] = useState("");
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("");
+  const [hasNext, setHasNext] = useState(false);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
-    async function fetchCats() {
-      const url = search
-        ? `https://cataas.com/api/cats?tags=${search}`
-        : `https://cataas.com/api/cats?limit=10`;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(res.status);
-        }
-
-        const data = await res.json();
-        return data;
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    }
-
     async function loadCats() {
-      const kitty = await fetchCats();
-      setCats(kitty);
+      const { cats, hasNext } = await getCats({ search, skip });
+      setCats(cats);
+      console.log(hasNext);
+      setHasNext(hasNext);
     }
     loadCats();
-  }, [search]);
+  }, [search, skip]);
 
-  const changeSearch = ()=>{
-    setSearch(inputValue)
-  }
-  const handleInputValue = (e) =>{
-    setInputValue(e.target.value)
-  }
+  const changeSearch = () => {
+    setSkip(0);
+    setSearch(inputValue);
+  };
+  const handleInputValue = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const incrementSkip = () => {
+    const increment = 5;
+    setSkip((prev) => prev + increment);
+  };
+
+  const decreaseSkip = () => {
+    const decrease = 5;
+    setSkip((prev) => prev - decrease);
+  };
+
   return (
     <>
       <Header />
@@ -67,6 +75,8 @@ function App() {
           <button onClick={changeSearch}>Search</button>
         </div>
         <Gallery cats={cats} />
+        <NextButton hasNext={hasNext} incrementSkip={incrementSkip} />
+        <PrevButton skip={skip} decrementSkip={decreaseSkip} />
       </div>
     </>
   );
