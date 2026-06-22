@@ -22,20 +22,28 @@ function App() {
   const [hasNext, setHasNext] = useState(false);
   const [skip, setSkip] = useState(0);
   const [refreshKey, setRefreshKey] = useState(0);
-  const [bookmark, setBookmarks] = useState([]);
+  const [bookmark, setBookmarks] = useState(() => {
+    const localData = localStorage.getItem("bookmarks");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [view, setView] = useState("gallery");
 
+  useEffect(() => {
+    localStorage.setItem("bookmarks", JSON.stringify(bookmark));
+  }, [bookmark]);
 
-  const renderView = () =>{
+  const renderView = () => {
     switch (view) {
       case "gallery":
-        return <Gallery cats={cats} onBookmark={onBookmark} setTag={changeSearch} />;
+        return (
+          <Gallery cats={cats} onBookmark={onBookmark} setTag={changeSearch} />
+        );
       case "tags":
         return "test";
       case "bookmarks":
-        return "test"
+        return <Gallery cats={bookmark} onBookmark={onBookmark} setTag={changeSearch} />;
     }
-  }
+  };
 
   useEffect(() => {
     async function loadCats() {
@@ -82,18 +90,16 @@ function App() {
   const onBookmark = (clickedCat) => {
     const isBookmarked = bookmark.some((fav) => fav.id === clickedCat.id);
     if (isBookmarked) {
-      setBookmarks((prev) => prev.filter((fav) => fav.id === clickedCat));
+      setBookmarks((prev) => prev.filter((fav) => fav.id !== clickedCat.id));
     } else {
       setBookmarks((prev) => [...prev, clickedCat]);
     }
-
-    console.log(clickedCat);
-    console.log(bookmark);
   };
 
-  const handleView = (newView) =>{ 
-    setView(newView)
-  }
+  const handleView = (newView) => {
+    setSearch("");
+    setView(newView);
+  };
 
   return (
     <>
@@ -106,7 +112,7 @@ function App() {
         />
       </Header>
       <MainContent>
-        <Sidebar isSidebar={isSidebar} view={handleView} /> 
+        <Sidebar isSidebar={isSidebar} view={handleView}/>
         {renderView()}
         <div className="navigation-btn-container">
           <PrevButton skip={skip} decrementSkip={decreaseSkip} />
