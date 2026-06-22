@@ -5,11 +5,6 @@ import { getCats } from "./services/catsApi";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Gallery from "./components/Gallery";
-import {
-  PrevButton,
-  NextButton,
-  RandomButton,
-} from "./components/NavigationButtons";
 import MainContent from "./components/MainContent";
 // css
 import "./App.css";
@@ -36,12 +31,36 @@ function App() {
     switch (view) {
       case "gallery":
         return (
-          <Gallery cats={cats} onBookmark={onBookmark} setTag={changeSearch} />
+          <Gallery
+            cats={cats}
+            onBookmark={onBookmark}
+            setTag={changeSearch}
+            skip={skip}
+            decreaseSkip={decreaseSkip}
+            incrementSkip={incrementSkip}
+            search={search}
+            hasNext={hasNext}
+            handleRefresh={handleRefresh}
+            view={view}
+          />
         );
       case "tags":
         return "test";
       case "bookmarks":
-        return <Gallery cats={bookmark} onBookmark={onBookmark} setTag={changeSearch} />;
+        return (
+          <Gallery
+            cats={bookmark}
+            onBookmark={onBookmark}
+            setTag={changeSearch}
+            skip={skip}
+            decreaseSkip={decreaseSkip}
+            incrementSkip={incrementSkip}
+            search={search}
+            hasNext={hasNext}
+            handleRefresh={handleRefresh}
+            view={view}
+          />
+        );
     }
   };
 
@@ -112,13 +131,8 @@ function App() {
         />
       </Header>
       <MainContent>
-        <Sidebar isSidebar={isSidebar} view={handleView}/>
+        <Sidebar isSidebar={isSidebar} view={handleView} />
         {renderView()}
-        <div className="navigation-btn-container">
-          <PrevButton skip={skip} decrementSkip={decreaseSkip} />
-          <NextButton hasNext={hasNext} incrementSkip={incrementSkip} />
-          <RandomButton handleRefresh={handleRefresh} search={search} />
-        </div>
       </MainContent>
     </>
   );
