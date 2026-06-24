@@ -9,7 +9,7 @@ import MainContent from "./components/MainContent";
 // css
 import "./App.css";
 import Sidebar from "./components/Sidebar";
-
+import Tags from "./components/Tags";
 function App() {
   const [cats, setCats] = useState([]);
   const [search, setSearch] = useState("");
@@ -42,10 +42,11 @@ function App() {
             hasNext={hasNext}
             handleRefresh={handleRefresh}
             view={view}
+            bookmark={bookmark}
           />
         );
       case "tags":
-        return "test";
+        return <Tags setTag={changeSearch}/>;
       case "bookmarks":
         return (
           <Gallery
@@ -59,6 +60,7 @@ function App() {
             hasNext={hasNext}
             handleRefresh={handleRefresh}
             view={view}
+            bookmark={bookmark}
           />
         );
     }
@@ -76,6 +78,7 @@ function App() {
 
   const changeSearch = (tag) => {
     setSkip(0);
+    setView("gallery");
     if (tag) {
       setSearch(tag);
     } else {
@@ -119,6 +122,7 @@ function App() {
     setSearch("");
     setView(newView);
   };
+
 
   return (
     <>
