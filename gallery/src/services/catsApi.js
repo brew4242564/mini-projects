@@ -39,3 +39,13 @@ export async function getCats({ search, skip }) {
 }
 
 
+export async function getTags(){
+  try{
+    const res = await fetch("https://cataas.com/api/tags");
+    if(!res.ok) throw new Error(`Error tag: ${res.status}`);
+    const data = await res.json();
+    return data;
+  }catch (error) {
+    console.error("Error en getTags: ", error)
+  }
+}
