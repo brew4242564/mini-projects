@@ -1,6 +1,5 @@
 import { getTags } from "../services/catsApi";
 import { useState, useEffect } from "react";
-
 export default function Tags({setTag}){
     const [tags, setTags] = useState([]);
     useEffect(()=> {

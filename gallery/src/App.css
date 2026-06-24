@@ -153,7 +153,40 @@ ul {
 .sidebar a:hover {
   color: var(--secondary-color);
 }
+.image-menu{
+  display: flex;
+  gap: 32px;
+}
 
+.image-tags{
+  display: flex;
+  gap: 8px;
+}
+
+.fav-btn{
+  background-color: transparent;
+  color: var(--font-color);
+  border: 0px;
+}
+
+.tag-btn{
+  display: flex;
+  background-color: transparent;
+  color: var(--font-color);
+  border-radius: 16px;
+  padding: 6px 12px;
+  border: 0px;
+}
+
+.tag-btn:nth-child(5n+1) { background-color: #ff6b6b;}
+.tag-btn:nth-child(5n+2) { background-color: #4dadf7; } 
+.tag-btn:nth-child(5n+3) { background-color: #51cf66; } 
+.tag-btn:nth-child(5n+4) { background-color: #fcc419; } 
+.tag-btn:nth-child(5n+5) { background-color: #cc5de8; }
+.tag-btn:hover{
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
 @media (min-width: 768px) {
   .search-container {
     width: auto;

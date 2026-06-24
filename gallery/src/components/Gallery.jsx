@@ -1,4 +1,6 @@
 import { PrevButton, NextButton, RandomButton } from "./NavigationButtons";
+import { Heart, HeartCrack } from "lucide-react";
+import { HoverIcon } from "./icons/HoverIcons";
 
 const Gallery = ({
   cats,
@@ -11,6 +13,7 @@ const Gallery = ({
   search,
   handleRefresh,
   view,
+  bookmark,
 }) => {
   return (
     <div className="gallery-container">
@@ -23,7 +26,18 @@ const Gallery = ({
               className="photo"
             />
             <div className="image-menu">
-              <button onClick={() => onBookmark(cat)}>Bookmark</button>
+              <button className="fav-btn" onClick={() => onBookmark(cat)}>
+                {bookmark.some((fav) => fav.id === cat.id) ? (
+                  <HoverIcon
+                    default={Heart}
+                    hovered={HeartCrack}
+                    defaultProps={{ fill: "red", color: "red" }}
+                    hoveredProps={{ color: "red" }}
+                  />
+                ) : (
+                  <HoverIcon default={Heart} hovered={Heart} hoveredProps={{color: "red"}}/>
+                )}
+              </button>
               <div className="image-tags">
                 {cat.tags.map(
                   (tag) =>
@@ -31,6 +45,7 @@ const Gallery = ({
                       <button
                         key={`${cat.id}-${tag}`}
                         onClick={() => setTag(tag)}
+                        className="tag-btn"
                       >
                         {tag}
                       </button>
