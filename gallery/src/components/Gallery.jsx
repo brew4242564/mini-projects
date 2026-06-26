@@ -19,7 +19,7 @@ const Gallery = ({
     <div className="gallery-container">
       <div className="gallery-grid">
         {cats.map((cat) => (
-          <div key={cat.id}>
+          <div key={cat.id} className="cat-card">
             <img
               src={`https://cataas.com/cat/${cat.id}`}
               alt="cat"

@@ -79,9 +79,10 @@ function App() {
   const changeSearch = (tag) => {
     setSkip(0);
     setView("gallery");
-    if (tag) {
+    if (tag && typeof tag === 'string') {
       setSearch(tag);
     } else {
+      
       setSearch(inputValue);
     }
   };
@@ -135,7 +136,7 @@ function App() {
         />
       </Header>
       <MainContent>
-        <Sidebar isSidebar={isSidebar} view={handleView} />
+        <Sidebar isSidebar={isSidebar} view={handleView} activeView={view} />
         {renderView()}
       </MainContent>
     </>

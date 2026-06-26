@@ -1,6 +1,6 @@
 const BASE_URL = "https://cataas.com/api";
-const LIMIT_RANDOM = 5;
-const LIMIT_SEARCH = 6;
+const LIMIT_RANDOM = 12;
+const LIMIT_SEARCH = 13;
 
 export async function getCats({ search, skip }) {
   if (search) {
