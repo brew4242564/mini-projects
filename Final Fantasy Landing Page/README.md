@@ -1,0 +1,1 @@
+Una landing page que tratara de convencerte para que te adentres en una de las mejores franquicias de la historia.
