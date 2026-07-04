@@ -5,12 +5,11 @@ const Hero = () => {
   return (
     <>
       <section className={styles.container}>
-        <p>¿Por que deberias jugar..?</p>
-        <h1 className={styles.titulo}>
-          <span className={styles.heroTitle}>FINAL</span>{" "}
-          <span className={styles.heroTitle}>FANTASY</span>
+        <p className={styles.text}>¿Por que deberias jugar..?</p>
+        <h1 className={styles.heroTitle}>
+          FINAL FANTASY
         </h1>
-        <p>El JRPG que enamoro occidente</p>
+        <p className={styles.text}>El JRPG que enamoro occidente</p>
         <Button sectionName={"lorem"} className={styles.btn}></Button>
       </section>
     </>

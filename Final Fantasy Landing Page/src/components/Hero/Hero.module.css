@@ -1,26 +1,34 @@
 .heroTitle {
-  font-size: 5rem;
+  font-size: 3rem;
   text-decoration-line: underline;
 
-  color: black; 
+  color: black;
   text-shadow:
     1px 1px 0px white,
     -1px -1px 0px white,
     -1px 1px 0px white,
     1px -1px 0px white;
 }
-
+.text {
+  font-weight: 600;
+  color: black;
+  text-shadow:
+    1px 1px 0px white,
+    -1px -1px 0px white,
+    -1px 1px 0px white,
+    1px -1px 0px white;
+}
 .container {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./src/assets/dissidiaLogo.png');
+  background-image: url("./src/assets/finalFantasyIV.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #E8E6E1;
+  background-color: #e8e6e1;
 }
 
 .btn {
@@ -31,8 +39,18 @@
   bottom: 2rem;
 }
 
-.background{
-    position: absolute;
-    display: flex;
-    width: 100px;
+.background {
+  position: absolute;
+  display: flex;
+  width: 100px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    background-image: url("./src/assets/dissidiaLogo.png");
+  }
+
+  .heroTitle {
+    font-size: 5rem;
+  }
 }
