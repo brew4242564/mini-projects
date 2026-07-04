@@ -1,10 +1,10 @@
 import { ChevronDown } from "lucide-react";
-
-const Button = ({ sectionName }) => {
+import styles from "./Button.module.css"
+const Button = ({ sectionName, className}) => {
   return (
-    <div className="btn-container">
-      <button>{sectionName}</button>
-      <ChevronDown/>
+    <div className={className}>
+      <button className={styles.btn}>{sectionName}</button>
+      <ChevronDown className={styles.followArrow}/>
     </div>
   );
 };

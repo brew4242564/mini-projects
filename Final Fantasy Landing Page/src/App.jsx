@@ -6,9 +6,7 @@ function App() {
     <>
       <Header />
       <main>
-        <section>
           <Hero />
-        </section>
       </main>
     </>
   );

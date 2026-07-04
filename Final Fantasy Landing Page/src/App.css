@@ -6,9 +6,8 @@
   margin: 0;
   box-sizing: border-box;
 }
-
-.font {
-  font-family: "Marcellus";
+.font, h1, p {
+  font-family: "Marcellus", sans-serif;
 }
 
 main{
@@ -17,6 +16,4 @@ main{
 
 section {
   min-height: calc(100dvh - var(--header-height));
-
-  background-color: blue;
 }
