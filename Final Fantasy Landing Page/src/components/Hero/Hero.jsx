@@ -1,5 +1,5 @@
 import styles from "./Hero.module.css";
-import Button from "../FollowButton/Button";
+import Button from "../ScrollButton/ScrollButton";
 
 const Hero = () => {
   return (
@@ -10,7 +10,7 @@ const Hero = () => {
           FINAL FANTASY
         </h1>
         <p className={styles.text}>El JRPG que enamoro occidente</p>
-        <Button sectionName={"lorem"} className={styles.btn}></Button>
+        <Button sectionName={"Origenes"} className={styles.btn}></Button>
       </section>
     </>
   );

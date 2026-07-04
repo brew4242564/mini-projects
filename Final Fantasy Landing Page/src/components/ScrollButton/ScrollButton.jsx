@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import styles from "./Button.module.css"
+import styles from "./ScrollButton.module.css"
 const Button = ({ sectionName, className}) => {
   return (
     <div className={className}>

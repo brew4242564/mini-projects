@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
 :root{
     --header-height: 40px;
+    --bg-color: #e8e6e1;
 }
 * {
   margin: 0;
