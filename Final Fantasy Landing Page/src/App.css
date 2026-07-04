@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
+:root{
+    --header-height: 40px;
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.font {
+  font-family: "Marcellus";
+}
+
+main{
+    padding-top: var(--header-height);
+}
+
+section {
+  min-height: calc(100dvh - var(--header-height));
+
+  background-color: blue;
+}
