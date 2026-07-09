@@ -1,0 +1,34 @@
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: var(--primary);
+}
+
+.tableWrapper {
+  border: 1px solid var(--borders);
+  border-radius: 1rem;
+  width: 80%;
+  overflow-y: scroll;
+
+}
+.table th:first-child,
+.table td:first-child {
+  width: 80%;
+}
+
+/* action */
+.table th:last-child,
+.table td:last-child {
+  width: 20%;
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 2px solid var(--borders);
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 600;
+}

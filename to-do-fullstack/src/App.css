@@ -1,0 +1,88 @@
+:root {
+  --primary: #fafafa; /* fondos */
+  --borders: #e0e0e0; /* bordes suaves */
+  --muted: #a0a0a0; /* texto secundario, deshabilitado */
+  --text: #4a4a4a; /* texto principal */
+  --accent: #1a1a1a; /* énfasis, hover fuerte */
+  --red: #da2828;
+}
+body {
+  margin: 0;
+}
+.title{
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+    color: var(--accent);
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  background-color: var(--primary);
+  height: 100dvh;
+  box-sizing: border-box;
+
+}
+
+.add-form {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+
+.add-form input {
+  width: 80%;
+  height: 1.25rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid var(--borders);
+  color: var(--text);
+  background-color: var(--primary);
+}
+.add-form input:focus {
+  outline: none;
+}
+.add-form button {
+  width: 20%;
+  border-radius: 1rem;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: 1px solid var(--borders);
+  color: var(--text);
+  background-color: var(--borders);
+}
+
+
+.add-form button:hover{
+    background-color: var(--muted);
+}
+
+
+@media (min-width: 768px){
+    .add-form input{
+        width: 90%;
+    }
+    .add-form button{
+        width: 10%;
+    }
+}
+
