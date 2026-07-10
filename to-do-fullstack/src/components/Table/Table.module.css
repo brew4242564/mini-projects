@@ -9,7 +9,7 @@
   border: 1px solid var(--borders);
   border-radius: 1rem;
   width: 80%;
-  overflow-y: scroll;
+  overflow-y: auto;
 
 }
 .table th:first-child,

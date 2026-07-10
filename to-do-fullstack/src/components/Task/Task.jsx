@@ -2,8 +2,7 @@ import styles from "./Task.module.css";
 import { Trash } from "lucide-react";
 import { HoverIcon } from "../HoverIcon/HoverIcon";
 const Task = ({ taskName, deleteTask, taskID, toggleTask, taskDone }) => {
-  console.log(taskDone);
-
+  
   return (
     <tr className={styles.container}>
       <td className={taskDone ? styles.done : ""}>
