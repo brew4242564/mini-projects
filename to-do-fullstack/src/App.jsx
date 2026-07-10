@@ -3,17 +3,20 @@ import Table from "./components/Table/Table";
 import Task from "./components/Task/Task";
 import "./App.css";
 import { supabase } from "./services/supabaseClient";
+import {
+  insertTask,
+  removeTask,
+  updateTaskDone,
+  fetchTasks,
+} from "./services/taskService";
 function App() {
   const [list, setLists] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
-  //fetch
+  
   useEffect(() => {
     const fetchTask = async () => {
-      const { data, error } = await supabase
-        .from("tasks")
-        .select("*")
-        .order("created_at", { ascending: true });
+      const { data, error } = await fetchTasks();
 
       if (error) {
         console.error("Error fetching task: ", error);
@@ -27,11 +30,7 @@ function App() {
   const addTask = async () => {
     if (inputValue === "") return;
     try {
-      const { data, error } = await supabase
-        .from("tasks")
-        .insert([{ text: inputValue, done: false }])
-        .select();
-
+      const { data, error } = await insertTask(inputValue);
       if (error) {
         console.error("Error adding task: ", error);
         return;
@@ -46,10 +45,7 @@ function App() {
   const toggleTask = async (taskID) => {
     const task = list.find((l) => l.id === taskID);
     try {
-      const { error } = await supabase
-        .from("tasks")
-        .update({ done: !task.done })
-        .eq("id", taskID);
+      const { error } = await updateTaskDone(taskID, !task.done);
       if (error) {
         console.error("Error actualizando tarea: ", error);
         return;
@@ -69,7 +65,7 @@ function App() {
 
   const deleteTask = async (taskID) => {
     try {
-      const { error } = await supabase.from("tasks").delete().eq("id", taskID);
+      const { error } = await removeTask(taskID);
       if (error) {
         console.error("Error deleting task", error);
       }
