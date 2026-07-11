@@ -3,18 +3,38 @@ import Table from "./components/Table/Table";
 import Task from "./components/Task/Task";
 import "./App.css";
 import { supabase } from "./services/supabaseClient";
+import { getSession, signOut } from "./services/authServices";
 import {
   insertTask,
   removeTask,
   updateTaskDone,
   fetchTasks,
 } from "./services/taskService";
+
+import Auth from "./components/Auth/Auth";
 function App() {
   const [list, setLists] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [session, setSession] = useState(null);
 
-  
   useEffect(() => {
+    //auth
+    getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // fetch
+    if(!session) return;
     const fetchTask = async () => {
       const { data, error } = await fetchTasks();
 
@@ -25,7 +45,7 @@ function App() {
       setLists(data);
     };
     fetchTask();
-  }, []);
+  }, [session]);
 
   const addTask = async () => {
     if (inputValue === "") return;
@@ -75,8 +95,18 @@ function App() {
     }
   };
 
+  const handleLogout = async() =>{
+    const {error} = await signOut();
+    if(error) console.error("Log out error", error);
+  }
+
+  if (!session) {
+    return <Auth />;
+  }
+
   return (
     <>
+      <button onClick={handleLogout}>Log Out</button>
       <h1 className="title">TO-DO</h1>
       <div className="add-form">
         <input type="text" onChange={handleInputValue} value={inputValue} />
