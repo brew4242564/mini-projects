@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signIn, signUp } from "../../services/authServices";
-
+import styles from "./Auth.module.css";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,33 +30,35 @@ const Auth = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <h2>{isSignUp ? "Sign Up" : "Log In"}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">{isSignUp ? "Sign up" : "Login"}</button>
-      </form>
-      {errorMsg && <p className="auth-error">{errorMsg}</p>}
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className={styles.buttonLog}>{isSignUp ? "Sign up" : "Login"}</button>
+        </form>
+        {errorMsg && <p className="auth-error">{errorMsg}</p>}
 
-      <button onClick={() => setIsSignUp(!isSignUp)} className="auth-toggle">
-        {isSignUp
-          ? "Already have an account? Log in."
-          : "Don't have an account? Sign up."}
-      </button>
+        <button onClick={() => setIsSignUp(!isSignUp)} className="auth-toggle" className={styles.buttonAlt}>
+          {isSignUp
+            ? "Already have an account? Log in."
+            : "Don't have an account? Sign up."}
+        </button>
+      </div>
     </div>
   );
 };

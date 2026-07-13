@@ -4,7 +4,6 @@
   --muted: #a0a0a0; /* texto secundario, deshabilitado */
   --text: #4a4a4a; /* texto principal */
   --accent: #1a1a1a; /* énfasis, hover fuerte */
-  --red: #da2828;
 }
 body {
   margin: 0;
@@ -20,7 +19,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem;
   font-family:
     system-ui,
     -apple-system,
@@ -36,13 +35,12 @@ body {
   background-color: var(--primary);
   height: 100dvh;
   box-sizing: border-box;
-
 }
 
 .add-form {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 100%;
 }
 
 .add-form input {
@@ -83,6 +81,10 @@ body {
     }
     .add-form button{
         width: 10%;
+    }
+
+    .add-form{
+      width: 80%;
     }
 }
 

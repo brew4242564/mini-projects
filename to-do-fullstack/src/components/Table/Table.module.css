@@ -8,9 +8,8 @@
 .tableWrapper {
   border: 1px solid var(--borders);
   border-radius: 1rem;
-  width: 80%;
+  width: 100%;
   overflow-y: auto;
-
 }
 .table th:first-child,
 .table td:first-child {
@@ -31,4 +30,10 @@
   color: var(--accent);
   font-size: 18px;
   font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .tableWrapper {
+    width: 80%;
+  }
 }

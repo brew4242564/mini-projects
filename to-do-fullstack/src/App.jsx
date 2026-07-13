@@ -10,13 +10,26 @@ import {
   updateTaskDone,
   fetchTasks,
 } from "./services/taskService";
-
+import Header from "./components/Header/Header"
 import Auth from "./components/Auth/Auth";
 function App() {
   const [list, setLists] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [session, setSession] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
+  useEffect(() => {
+    //pfp
+    if (!session) return;
 
+    const getProfilPic = () => {
+      const character = session.user.email.trim().charAt(0);
+      console.log(character);
+      setProfilePic(
+        `https://api.dicebear.com/10.x/initials/svg?seed=${character}`,
+      );
+    };
+    getProfilPic();
+  }, [session]);
   useEffect(() => {
     //auth
     getSession().then(({ data: { session } }) => {
@@ -26,7 +39,7 @@ function App() {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
-      }
+      },
     );
 
     return () => listener.subscription.unsubscribe();
@@ -34,7 +47,7 @@ function App() {
 
   useEffect(() => {
     // fetch
-    if(!session) return;
+    if (!session) return;
     const fetchTask = async () => {
       const { data, error } = await fetchTasks();
 
@@ -95,19 +108,21 @@ function App() {
     }
   };
 
-  const handleLogout = async() =>{
-    const {error} = await signOut();
-    if(error) console.error("Log out error", error);
-  }
+  const handleLogout = async () => {
+    const { error } = await signOut();
+    if (error) console.error("Log out error", error);
+  };
 
   if (!session) {
-    return <Auth />;
+    return (
+      <>
+        <Auth />
+      </>
+    );
   }
-
   return (
     <>
-      <button onClick={handleLogout}>Log Out</button>
-      <h1 className="title">TO-DO</h1>
+      <Header profilePic={profilePic} handleLogout={handleLogout}/>
       <div className="add-form">
         <input type="text" onChange={handleInputValue} value={inputValue} />
         <button onClick={addTask}>Add</button>
