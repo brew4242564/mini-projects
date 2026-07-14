@@ -17,7 +17,7 @@ function betSimulation(money, bet_price) {
     const prize = money + bet_price;
     return { win: true, balance: prize };
   } else {
-    const prize = Math.max(money - bet_price);
+    const prize = Math.max(0, money - bet_price);
     return { win: false, balance: prize };
   }
 }
