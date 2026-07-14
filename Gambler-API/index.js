@@ -24,21 +24,22 @@ function betSimulation(money, bet_price) {
 
 App.get("/gambling", (req, res) => {
   let money = BASE_MONEY;
-  let numberOfTry = 1;
+  let roundSurvived = 0;
   const history = [];
-  for (numberOfTry; numberOfTry <= BASE_NUMBER_TRY; numberOfTry++) {
+  for (let i = 1; i <= BASE_NUMBER_TRY; i++) {
     if (money < BASE_BET_PRICE) {
-      numberOfTry--; //no se pudo jugar esta ronda, no deberia contarla.
       break;
     }
 
     const { win, balance } = betSimulation(money, BASE_BET_PRICE);
     money = balance;
-    if (numberOfTry % BET_FREQUENCY_COMISSION === 0) {
+    if (i % BET_FREQUENCY_COMISSION === 0) {
       money = Math.max(0, money - BASE_BET_COMISSION);
     }
+
+    roundSurvived = i;
     history.push({
-      round: numberOfTry,
+      round: roundSurvived,
       win: win,
       currentMoney: money,
     });
@@ -47,7 +48,7 @@ App.get("/gambling", (req, res) => {
   res.json({
     INITIAL_MONEY: BASE_MONEY,
     BET_PRICE: BASE_BET_PRICE,
-    TRY_SURVIVED: numberOfTry,
+    TRY_SURVIVED: roundSurvived,
     FINAL_MONEY: money,
     HISTORY: history,
   });
