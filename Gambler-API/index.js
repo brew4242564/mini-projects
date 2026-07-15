@@ -1,7 +1,9 @@
 const express = require("express");
 const App = express();
 const PORT =  process.env.PORT || 3001;
+const cors = require('cors');
 
+App.use(cors());
 // BASE VALUES
 const BASE_MONEY = 100;
 const BASE_NUMBER_TRY = 1000;
