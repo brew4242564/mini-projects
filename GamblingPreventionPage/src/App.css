@@ -1,0 +1,16 @@
+:root{
+    --bg: #f5f7fa;
+    --text: #060709;
+}
+
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--bg);
+}
+
