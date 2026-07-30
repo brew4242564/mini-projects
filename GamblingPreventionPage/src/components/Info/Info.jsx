@@ -6,7 +6,7 @@ const Info = ({ chances, freq }) => {
       <p>Bet cost: 1$</p>
       <p>Comission: 1$</p>
       <p>Comission Frequency: Every {freq} games</p>
-      <p>Try's: 1000</p>
+      <p>Try's: 100</p>
       <p>Win chances: {chances} %</p>
     </div>
   );

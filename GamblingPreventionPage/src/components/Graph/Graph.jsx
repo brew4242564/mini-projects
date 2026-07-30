@@ -37,16 +37,19 @@ function Graph({ chances, freq }) {
     plugins: {
       title: {
         display: true,
-        text: `Survived for ${data.TRY_SURVIVED} rounds, ended up with $${data.FINAL_MONEY}`,
-      },    legend: {
-      display: false,
-    },
+        text: `Ended up with $${data.FINAL_MONEY}`,
+      },
+      legend: {
+        display: false,
+      },
     },
   };
 
   return (
-    <div className={styles.chartContainer}>
-      <Line data={chartData} options={options} />
+    <div className={styles.chartWrapper}>
+      <div className={styles.chartContainer}>
+        <Line data={chartData} options={options} />
+      </div>
     </div>
   );
 }
