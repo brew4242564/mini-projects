@@ -6,7 +6,7 @@ const cors = require("cors");
 App.use(cors());
 // BASE VALUES
 const BASE_MONEY = 100;
-const BASE_NUMBER_TRY = 1000;
+const BASE_NUMBER_TRY = 100;
 const BASE_BET_PRICE = 1;
 const BASE_BET_COMISSION = 1;
 const BET_FREQUENCY_COMISSION = 10;
